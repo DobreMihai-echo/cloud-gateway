@@ -1,0 +1,46 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: API-GATEWAY
+  config:
+    import: configserver:${CONFIG_SERVER_URL:http://localhost:9000}
+  cloud:
+    gateway:
+      routes:
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: USER-SERVICE
+                fallbackuri: forward:/usersServiceFallBack
+        - id: EVENTS-SERVICE
+          uri: lb://EVENTS-SERVICE
+          predicates:
+            - Path=/events/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: EVENTS-SERVICE
+                fallbackuri: forward:/eventsServiceFallBack
+        - id: NOTIFICATION-SERVICE
+          uri: lb://NOTIFICATION-SERVICE
+          predicates:
+            - Path=/notifications/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: NOTIFICATION-SERVICE
+                fallbackuri: forward:/notificationServiceFallBack
+
+#okta:
+#  oauth2:
+#    issuer: https://dev-71660228.okta.com/oauth2/default
+#    audience: api://default
+#    client-id: 0oa9jgnray4KI5fEe5d7
+#    client-secret: WAVEmKt_TaDr9ggz0jbIdupRe4hCKAmJo6mDcx7Q
+#    scopes: openid, profile, email, offline_access
