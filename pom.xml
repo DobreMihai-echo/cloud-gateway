@@ -107,7 +107,7 @@
 						<image>openjdk:11</image>
 					</from>
 					<to>
-						<image>${REPO_URL}/hiluminatul/cloud-gateway</image>
+						<image>${REPO_URL}/cloud-gateway</image>
 						<tags>${project.version}</tags>
 					</to>
 				</configuration>
