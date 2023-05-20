@@ -13,15 +13,10 @@ spec:
     spec:
       containers:
       - name: cloud-gateway-app
-        image: hiluminatul/cloud-gateway
+        image: IMAGE_URL/cloud-gateway
         ports:
         - containerPort: 9090
         env:
-          - name: EUREKA_SERVER_ADDRESS
-            valueFrom:
-              configMapKeyRef:
-                key: EUREKA_SERVER_ADDRESS
-                name: eureka-cm
           - name: CONFIG_SERVER_URL
             valueFrom:
               configMapKeyRef:

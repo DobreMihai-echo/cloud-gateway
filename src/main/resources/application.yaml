@@ -10,7 +10,7 @@ spring:
     gateway:
       routes:
         - id: USER-SERVICE
-          uri: lb://USER-SERVICE
+          uri: http://user-service-svc
           predicates:
             - Path=/api/users/**
           filters:
@@ -19,7 +19,7 @@ spring:
                 name: USER-SERVICE
                 fallbackuri: forward:/usersServiceFallBack
         - id: EVENTS-SERVICE
-          uri: lb://EVENTS-SERVICE
+          uri: http://events-service-svc
           predicates:
             - Path=/events/**
           filters:
@@ -28,7 +28,7 @@ spring:
                 name: EVENTS-SERVICE
                 fallbackuri: forward:/eventsServiceFallBack
         - id: NOTIFICATION-SERVICE
-          uri: lb://NOTIFICATION-SERVICE
+          uri: http://notification-service-svc
           predicates:
             - Path=/notifications/**
           filters:

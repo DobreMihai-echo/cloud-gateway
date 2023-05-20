@@ -43,11 +43,6 @@
 			<artifactId>spring-cloud-starter-gateway</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
@@ -110,17 +105,9 @@
 				<configuration>
 					<from>
 						<image>openjdk:11</image>
-						<auth>
-							<username>hiluminatul</username>
-							<password>Ghostblade123!</password>
-						</auth>
 					</from>
 					<to>
-						<image>registry.hub.docker.com/hiluminatul/cloud-gateway</image>
-						<auth>
-							<username>hiluminatul</username>
-							<password>Ghostblade123!</password>
-						</auth>
+						<image>${REPO_URL}/hiluminatul/cloud-gateway</image>
 						<tags>${project.version}</tags>
 					</to>
 				</configuration>
