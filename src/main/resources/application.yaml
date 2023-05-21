@@ -13,11 +13,6 @@ spring:
           uri: http://user-service-svc
           predicates:
             - Path=/api/users/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: USER-SERVICE
-                fallbackuri: forward:/usersServiceFallBack
         - id: EVENTS-SERVICE
           uri: http://events-service-svc
           predicates:
