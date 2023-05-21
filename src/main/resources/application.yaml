@@ -14,7 +14,7 @@ spring:
           predicates:
             - Path=/api/**
         - id: EVENTS-SERVICE
-          uri: http://events-service-svc
+          uri: http://events-service-svc:80
           predicates:
             - Path=/events/**
           filters:
