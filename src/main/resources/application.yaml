@@ -10,9 +10,9 @@ spring:
     gateway:
       routes:
         - id: USER-SERVICE
-          uri: http://user-service-svc
+          uri: http://10.110.0.108
           predicates:
-            - Path=/api/users/**
+            - Path=/api/**
         - id: EVENTS-SERVICE
           uri: http://events-service-svc
           predicates:
