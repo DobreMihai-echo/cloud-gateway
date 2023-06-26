@@ -8,34 +8,38 @@ spring:
     import: configserver:${CONFIG_SERVER_URL:http://localhost:9000}
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
       routes:
         - id: USER-SERVICE
           uri: http://user-service-svc
           predicates:
-            - Path=/api/**
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
         - id: EVENTS-SERVICE
-          uri: http://events-service-svc:80
+          uri: http://events-service-svc
           predicates:
             - Path=/events/**
           filters:
-            - name: CircuitBreaker
-              args:
-                name: EVENTS-SERVICE
-                fallbackuri: forward:/eventsServiceFallBack
-        - id: NOTIFICATION-SERVICE
-          uri: http://notification-service-svc
-          predicates:
-            - Path=/notifications/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: NOTIFICATION-SERVICE
-                fallbackuri: forward:/notificationServiceFallBack
+            - StripPrefix=1
+#        - id: EVENTS-SERVICE
+#          uri: http://events-service-svc:80
+#          predicates:
+#            - Path=/events/**
+#          filters:
+#            - name: CircuitBreaker
+#              args:
+#                name: EVENTS-SERVICE
+#                fallbackuri: forward:/eventsServiceFallBack
 
-#okta:
-#  oauth2:
-#    issuer: https://dev-71660228.okta.com/oauth2/default
-#    audience: api://default
-#    client-id: 0oa9jgnray4KI5fEe5d7
-#    client-secret: WAVEmKt_TaDr9ggz0jbIdupRe4hCKAmJo6mDcx7Q
-#    scopes: openid, profile, email, offline_access
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka
+
+app:
+  jwtCookieName: myplanet
+  jwtSecret: myplanetsecret
+  jwtExpirationMs: 86400000
